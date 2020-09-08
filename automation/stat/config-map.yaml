@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: install-stat-tools-and-run
+
+data:
+  install.sh: |
+    #!/bin/bash
+    apt update
+    apt install sysstat net-tools fio sysbench iperf3 -y
+

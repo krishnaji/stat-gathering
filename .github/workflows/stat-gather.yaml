@@ -1,0 +1,30 @@
+
+name: Get-Stats
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Run-Stat-Gathering
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: azure/login@v1
+     
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            cd automation/stat
+            az aks install-cli
+            sh ./run-stat-test.sh $(cat run-file.txt )
+        
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Stats
+          path: automation/stat/*.log

@@ -1,0 +1,1 @@
+AKS kluster m128r Standard_M128

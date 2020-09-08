@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: statjob
+
+spec:
+  # selector:
+  #     matchLabels:
+  #       name: statjob # Label selector that determines which Pods belong to the DaemonSet
+  template:
+    metadata:
+      labels:
+        name: statjob # Pod template's label selector
+    spec:
+      hostPID: true
+      nodeSelector:
+         allow-stat-test: "True"
+      restartPolicy: Never
+      containers:
+      - name: statjob
+        image: krishnaji/statgathering
+        
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - name: install-script
+            mountPath: /tmp
+          - name: host-mount
+            mountPath: /host
+          - name: azurefile-std
+            mountPath: /mnt/azurefile-std
+          - name: azurefile-prem
+            mountPath: /mnt/azurefile-prem
+
+      volumes:
+        - name: install-script
+          configMap:
+            name: install-stat-tools-and-run
+        - name: host-mount
+          hostPath:
+            path: /tmp/install
+        - name: azurefile-std
+          persistentVolumeClaim:
+            claimName: azurefile-std
+        - name: azurefile-prem
+          persistentVolumeClaim:
+            claimName: azurefile-prem
