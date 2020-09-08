@@ -3,6 +3,9 @@
 # ./run-sta-test.sh <resoruce-group-name> <AKS-Cluser-Name> <Node-Pool-Name> <VM-SKU>
 # eg. ./run-stat-test.sh k8s cluster m128 Standard_M128
 
+# Create AKS Cluster
+# az aks create -g  $1 -n --cluster-name $3 
+
 #create new nodepool
 az aks nodepool add -g $1 --cluster-name $2 --name $3  --node-osdisk-size 128 --node-vm-size $4 --node-count 1 --labels allow-stat-test=True --no-wait
 
@@ -38,3 +41,6 @@ if [ $? -eq 0 ]
 then
 kubectl delete -f . -n $3 && kubectl delete namespace $3 && az aks nodepool delete -g $1 --cluster-name $2 --name $3 --no-wait
 fi
+
+# Finally Delete AKS cluster
+# az aks delete  -g  $1 -n  $3 

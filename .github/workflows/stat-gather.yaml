@@ -22,7 +22,7 @@ jobs:
           inlineScript: |
             cd automation/stat
             az aks install-cli
-            sh ./run-stat-test.sh $(cat run-file.txt )
+            sh ./run-stat-test.sh $(cat run-test-for.txt )
         
       - uses: actions/upload-artifact@v2
         with:

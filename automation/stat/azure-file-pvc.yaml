@@ -8,7 +8,7 @@ spec:
   storageClassName: azurefile
   resources:
     requests:
-      storage: 128Gi
+      storage: 3400Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -21,4 +21,4 @@ spec:
   storageClassName: azurefile-premium
   resources:
     requests:
-      storage: 128Gi
+      storage: 34000Gi
