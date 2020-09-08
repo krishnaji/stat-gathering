@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read -r previous_nodepoolname < ./automation/previous-nodepool.txt
+read -r previous_nodepoolname < ./HPCC\ Client/terasort/previous-nodepool.txt
 
 echo "Creating nodepool $1 of type $2";
 find ./* -type f -exec sed -i "s/$previous_nodepoolname/$1/g" {} \;
