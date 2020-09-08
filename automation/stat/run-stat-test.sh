@@ -7,7 +7,7 @@
 # az aks create -g  $1 -n --cluster-name $3 
 
 #create new nodepool
-az aks nodepool add -g $1 --cluster-name $2 --name $3  --node-osdisk-size 128 --node-vm-size $4 --node-count 1 --labels allow-stat-test=True --no-wait
+az aks nodepool add -g $1 --cluster-name $2 --name $3  --node-osdisk-size 1000 --node-vm-size $4 --node-count 1 --labels allow-stat-test=True --no-wait
 
 # Get nodepool status
 nodepool_status=""
